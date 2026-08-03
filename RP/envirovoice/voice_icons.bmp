@@ -1,0 +1,87 @@
+////// @Angeldfire2
+
+
+
+
+
+
+
+
+{
+    "namespace": "voice_icon",
+    "empty": {
+        "type": "panel",
+        "size": [
+            0,
+            0
+        ]
+    },
+    "option_template": {
+        "type": "image",
+        "size": [
+            30,
+            30
+        ],
+        "controls": [
+            {
+                "icon": {
+                    "type": "image",
+                    "size": [
+                        "100%y",
+                        "70%"
+                    ],
+                    "texture": "$icon"
+                }
+            }
+        ]
+    },
+    "mute_on@voice_icon.option_template": {
+        "texture": "textures/ui/slider_button_default",
+        "$icon": "textures/ui/voice/mute"
+    },
+    "mute_off@voice_icon.option_template": {
+        "texture": "textures/ui/slider_button_default",
+        "$icon": "textures/ui/voice/unmute"
+    },
+    "mute_on_hover@voice_icon.option_template": {
+        "texture": "textures/ui/slider_button_hover",
+        "$icon": "textures/ui/voice/mute"
+    },
+    "mute_off_hover@voice_icon.option_template": {
+        "texture": "textures/ui/slider_button_hover",
+        "$icon": "textures/ui/voice/unmute"
+    },
+    "deafen_on@voice_icon.option_template": {
+        "texture": "textures/ui/slider_button_default",
+        "$icon": "textures/ui/voice/deafen"
+    },
+    "deafen_off@voice_icon.option_template": {
+        "texture": "textures/ui/slider_button_default",
+        "$icon": "textures/ui/voice/undeafen"
+    },
+    "deafen_on_hover@voice_icon.option_template": {
+        "texture": "textures/ui/slider_button_hover",
+        "$icon": "textures/ui/voice/deafen"
+    },
+    "deafen_off_hover@voice_icon.option_template": {
+        "texture": "textures/ui/slider_button_hover",
+        "$icon": "textures/ui/voice/undeafen"
+    },
+    "url_connect": {
+        "type": "image",
+        "size": [
+            16,
+            16
+        ],
+        "texture": "textures/ui/send_icon"
+    },
+    "button_toggle_custom_icon": {
+        "type": "image",
+        "$toggle_icon_size_voice|default": [
+            16,
+            16
+        ],
+        "size": "$toggle_icon_size_voice",
+        "texture": "$toggle_icon_texture_voice"
+    }
+}

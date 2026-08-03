@@ -1,0 +1,249 @@
+{
+    "namespace": "buttons_chat_voice",
+
+    "enter_menu_voicechat@buttons_chat_voice.command": {
+        "$texture_button_icon": "textures/ui/voice/unmute",
+        "$command": "/voice:settings",
+        "$command_tooltip": "Open the voice chat menu",
+        "size": [27, 27],
+        "layer": 7
+    },
+
+    "command@common.button": {
+        "$pressed_button_name": "button.nodata",
+        "size": [27, 27],
+        "$is_chat_not_command|default": false,
+        "$command_tooltip|default": "",
+        "$size_icon_button|default": ["60%", "60%"],
+        "controls": [
+            {
+                "default": {
+                    "type": "image",
+                    "texture": "textures/ui/slider_button_default",
+                    "controls": [
+                        {
+                            "icon": {
+                                "type": "image",
+                                "texture": "$texture_button_icon",
+                                "size": "$size_icon_button",
+                                "anchor_to": "center",
+                                "anchor_from": "center"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "hover": {
+                    "type": "image",
+                    "texture": "textures/ui/slider_button_hover",
+                    "controls": [
+                        {
+                            "icon": {
+                                "type": "image",
+                                "texture": "$texture_button_icon",
+                                "size": "$size_icon_button",
+                                "anchor_to": "center",
+                                "anchor_from": "center"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "pressed": {
+                    "type": "image",
+                    "texture": "textures/ui/slider_button_indent",
+                    "controls": [
+                        {
+                            "icon": {
+                                "type": "image",
+                                "texture": "$texture_button_icon",
+                                "size": "$size_icon_button",
+                                "anchor_to": "center",
+                                "anchor_from": "center"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "text_edit_box": {
+                    "type": "edit_box",
+                    "text_box_name": "#message_text_box",
+                    "max_length": 2147483647,
+                    "can_be_deselected": true,
+                    "text_control": "text_control",
+                    "always_listening": true,
+                    "focus_enabled": true,
+                    "size": ["100%sm","100%sm"],
+                    "offset": [2,0],
+                    "layer": 3,
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "$button_mappings|default": [
+                        {
+                            "from_button_id": "button.menu_select",
+                            "to_button_id": "button.keyboard_toggle",
+                            "handle_select": true,
+                            "handle_deselect": false,
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "from_button_id": "button.menu_select",
+                            "to_button_id": "button.text_edit_box_selected",
+                            "handle_select": false,
+                            "handle_deselect": true,
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "from_button_id": "button.menu_cancel",
+                            "to_button_id": "button.menu_select",
+                            "handle_select": false,
+                            "handle_deselect": true,
+                            "mapping_type": "global"
+                        }
+                    ],
+                    "button_mappings": "$button_mappings",
+                    "variables": [
+                        {
+                            "requires": "$touch",
+                            "$button_mappings": [
+                                {
+                                    "from_button_id": "button.menu_select",
+                                    "to_button_id": "button.keyboard_toggle",
+                                    "handle_select": true,
+                                    "handle_deselect": false,
+                                    "mapping_type": "pressed"
+                                },
+                                {
+                                    "from_button_id": "button.menu_select",
+                                    "to_button_id": "button.text_edit_box_selected",
+                                    "handle_select": false,
+                                    "handle_deselect": true,
+                                    "mapping_type": "pressed"
+                                },
+                                {
+                                    "from_button_id": "button.menu_ok",
+                                    "to_button_id": "button.text_edit_box_selected",
+                                    "handle_select": false,
+                                    "handle_deselect": true,
+                                    "mapping_type": "pressed"
+                                },
+                                {
+                                    "from_button_id": "button.menu_cancel",
+                                    "to_button_id": "button.menu_select",
+                                    "handle_select": false,
+                                    "handle_deselect": true,
+                                    "mapping_type": "global"
+                                }
+                            ]
+                        }
+                    ],
+                    "selected": "#selected",
+                    "bindings": [
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(#selected or not #selected)",
+                            "target_property_name": "#selected"
+                        }
+                    ],
+                    "controls": [
+                        {
+                            "text_control": {
+                                "type": "label",
+                                "text": "#item_name",
+                                "visible": false,
+                                "property_bag": {
+                                    "#property_field": "#item_name"
+                                },
+                                "localize": false,
+                                "bindings": [
+                                    {
+                                        "binding_type": "view",
+                                        "source_control_name": "display_text",
+                                        "source_property_name": "#item_name",
+                                        "target_property_name": "#text_content"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "((#text_content+' ') + $command)",
+                                        "target_property_name": "#item_name_with_command"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "#item_name_with_command",
+                                        "target_property_name": "#item_name"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "tooltip@common.button": {
+                                "hover_control": "hover",
+                                "controls": [
+                                    {
+                                        "hover@common.hover_text": {
+                                            "property_bag": {
+                                                "#hover_text": "$command_tooltip"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "consume_hover_events": false,
+                                "button_mappings": [
+                                    {
+                                        "to_button_id": "button.null",
+                                        "mapping_type": "global",
+                                        "consume_event": false
+                                    },
+                                    {
+                                        "to_button_id": "button.null",
+                                        "mapping_type": "pressed",
+                                        "consume_event": false
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "sendbutton@common_buttons.light_text_button": {
+                    "layer": 0,
+                    "propagate_alpha": true,
+                    "always_listen_to_input": true,
+                    "alpha": 0,
+                    "size": ["100%sm","100%sm"],
+                    "offset": [2,0],
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "$button_text": "exit",
+                    "button_mappings": [
+                        {
+                            "from_button_id": "button.menu_select",
+                            "to_button_id": "button.send",
+                            "consume_event": false,
+                            "mapping_type": "pressed",
+                            "scope": "global"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "text_box": {
+        "type": "panel",
+        "size": ["fill",27],
+        "controls": [
+            {
+                "text_edit_box@chat.text_edit_box": {
+                    "size": ["100%", "100%"],
+                    "selected": true,
+                    "always_listening": true,
+                    "focus_enabled": true
+                }
+            }
+        ]
+    }
+}

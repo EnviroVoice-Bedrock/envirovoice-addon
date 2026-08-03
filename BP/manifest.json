@@ -1,0 +1,52 @@
+{
+    "format_version": 2,
+    "metadata": {
+        "product_type": "addon"
+    },
+    "header": {
+        "name": "EnviroVoice",
+        "description": "Halo333XYT",
+        "min_engine_version": [
+            1,
+            21,
+            100
+        ],
+        "uuid": "c57668d8-6e2e-4d91-9a8e-ceb9361f4ef0",
+        "version": [
+            1,
+            0,
+            0
+        ]
+    },
+    "capabilities": [
+        "script_eval"
+    ],
+    "modules": [
+        {
+            "description": "behavior",
+            "type": "script",
+            "uuid": "5a6d1319-bca7-4044-af86-efae0ba9b4c1",
+            "version": [
+                1,
+                0,
+                0
+            ],
+            "language": "javascript",
+            "entry": "scripts/index.js"
+        }
+    ],
+    "dependencies": [
+        {
+            "module_name": "@minecraft/server",
+            "version": "2.0.0"
+        },
+        {
+            "module_name": "@minecraft/server-ui",
+            "version": "2.0.0"
+        },
+        {
+            "module_name": "@minecraft/server-net",
+            "version": "beta"
+        }
+    ]
+}

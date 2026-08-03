@@ -1,0 +1,161 @@
+////// @Angeldfire2
+
+
+
+
+
+
+
+
+{
+  "namespace": "settings_voice",
+  "option_toggle": {
+    "type": "panel",
+    "size": [
+      "100%y+4px",
+      "100%"
+    ],
+    "$enabled|default": true,
+    "$option_label|default": "",
+    "$toggle_tts_header": "$option_label",
+    "$option_enabled_binding_name|default": "",
+    "$option_tooltip_binding_type|default": "none",
+    "$option_tooltip_collection_name|default": "",
+    "$option_tooltip_text_binding_name|default": "",
+    "$option_tooltip_visible_binding_name|default": "#default_visibility",
+    "$option_tooltip_icon|default": "textures/ui/infobulb",
+    "controls": [
+      {
+        "option_generic_core@settings_voice.option_generic_core": {}
+      }
+    ]
+  },
+  "option_generic_core": {
+    "$allow_data_binding|default": true,
+    "$option_label|default": "",
+    "$show_option_label|default": true,
+    "$label_bindings|default": [],
+    "$one_line_layout|default": false,
+    "$has_option_description|default": false,
+    "$option_description|default": "",
+    "$option_enabled_binding_type|default": "global",
+    "$option_label_alignment|default": "left",
+    "$option_tooltip_binding_type|default": "none",
+    "$option_tooltip_collection_name|default": "",
+    "$option_tooltip_popup_visible_binding|default": false,
+    "$option_tooltip_text_binding_name|default": "",
+    "$option_tooltip_visible_binding_name|default": "#default_visibility",
+    "$option_tooltip_icon|default": "textures/ui/infobulb",
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "enabled": "$enabled",
+    "variables": [
+      {
+        "requires": "(not $enabled or not $option_enabled_binding_name)",
+        "$option_enabled_binding_type": "none",
+        "$option_enabled_binding_name": "#not_data_bound"
+      }
+    ],
+    "bindings": [
+      {
+        "binding_type": "$option_enabled_binding_type",
+        "binding_name": "$option_enabled_binding_name",
+        "binding_name_override": "#enabled"
+      }
+    ],
+    "controls": [
+      {
+        "one_line_layout": {
+          "type": "panel",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "controls": [
+            {
+              "option_label_subpanel": {
+                "type": "panel",
+                "anchor_from": "center",
+                "anchor_to": "center",
+                "size": [
+                  "100%",
+                  "100%"
+                ],
+                "controls": [
+                  {
+                    "control_mute@settings_voice.option_toggle_control": {
+                      "$unchecked_control": "voice_icon.mute_off",
+                      "$checked_control": "voice_icon.mute_on",
+                      "$unchecked_hover_control": "voice_icon.mute_off_hover",
+                      "$checked_hover_control": "voice_icon.mute_on_hover",
+                      "bindings": [
+                        {
+                          "binding_type": "view",
+                          "source_control_name": "custom_toggle",
+                          "source_property_name": "(#voice_toggle = 'Mute')",
+                          "target_property_name": "#visible"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "control_deafen@settings_voice.option_toggle_control": {
+                      "$unchecked_control": "voice_icon.deafen_off",
+                      "$checked_control": "voice_icon.deafen_on",
+                      "$unchecked_hover_control": "voice_icon.deafen_off_hover",
+                      "$checked_hover_control": "voice_icon.deafen_on_hover",
+                      "bindings": [
+                        {
+                          "binding_type": "view",
+                          "source_control_name": "custom_toggle",
+                          "source_property_name": "(#voice_toggle = 'Deafen')",
+                          "target_property_name": "#visible"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "option_toggle_control": {
+    "type": "panel",
+    "controls": [
+      {
+        "option_toggle_control@common.toggle": {
+          "layer": 9,
+          "$toggle_state_binding_name|default": "$option_binding_name",
+          "$toggle_enabled_binding_name|default": "$option_enabled_binding_name",
+          "$toggle_enabled_binding_type|default": "global",
+          "size": [
+            "100%",
+            "100%c"
+          ],
+          "$binding_type": "global",
+          "$binding_condition": "once",
+          "$unchecked_locked_control": "settings_common.option_toggle_off_locked",
+          "$unchecked_locked_hover_control": "settings_common.option_toggle_off_locked",
+          "$checked_locked_control": "settings_common.option_toggle_on_locked",
+          "$checked_locked_hover_control": "settings_common.option_toggle_on_locked",
+          "$enable_directional_toggling": false,
+          "enabled": "$enabled",
+          "variables": [
+            {
+              "requires": "(not $option_enabled_binding_name or not $enabled)",
+              "$toggle_enabled_binding_name": "#not_data_bound",
+              "$toggle_enabled_binding_type": "none"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

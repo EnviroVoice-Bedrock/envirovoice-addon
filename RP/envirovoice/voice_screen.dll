@@ -1,0 +1,891 @@
+////// @Angeldfire2
+
+
+
+
+
+
+
+
+{
+    "namespace": "envirovoice",
+    "voice_factory_panel": {
+        "type": "panel",
+        "controls": [
+            {
+                "url@envirovoice.server_url_main": {}
+            },
+            {
+                "settings@envirovoice.toggle_main_voice_settings_menus": {}
+            }
+        ],
+        "bindings": [
+            {
+                "binding_name": "#title_text",
+                "binding_name_override": "#voice",
+                "binding_type": "global"
+            }
+        ]
+    },
+    /////     Voice Settings Screen 
+    "toggle_main_voice_settings_menus": {
+        "type": "panel",
+        "$voice_title_form": "Voice Settings",
+        "bindings": [
+            {
+                "binding_type": "view",
+                "source_control_name": "voice_factory_panel",
+                "source_property_name": "(#voice = $voice_title_form)",
+                "target_property_name": "#visible"
+            }
+        ],
+        "controls": [
+            {
+                "voice_settings_main@envirovoice.main_voice": {
+                    "$voice_ui_settings": 1,
+                    "size": [
+                        225,
+                        78
+                    ],
+                    "$content_voice_panel": "envirovoice.voice_settings_form_content",
+                    "$bindings_voice_main": []
+                }
+            },
+            {
+                "voice_players_main@envirovoice.main_voice": {
+                    "layer": 999,
+                    "$voice_ui_settings": 2,
+                    "$content_voice_panel": "envirovoice.voice_settings_players_content_panel",
+                    "size": [
+                        225,
+                        "90%"
+                    ],
+                    "$bindings_voice_main": [
+                        {
+                            "binding_type": "view",
+                            "source_control_name": "settings_voice_players_toggle_state",
+                            "source_property_name": "#toggle_state",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "voice_config_main@envirovoice.generate_form": {
+                    "layer": 999,
+                    "orientation": "vertical",
+                    "size": [
+                        225,
+                        "100%c"
+                    ],
+                    "factory": {
+                        "name": "buttons",
+                        "control_ids": {
+                            "step_slider": "@voice_icon.empty",
+                            "dropdown": "@voice_icon.empty",
+                            "input": "@voice_icon.empty",
+                            "header": "@voice_icon.empty",
+                            "divider": "@voice_icon.empty",
+                            "slider": "@voice_icon.empty",
+                            "toggle": "@voice_icon.empty",
+                            "label": "@envirovoice.content_menu_config_voice_chat"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "voice_settings_players_content_panel": {
+        "type": "panel",
+        "controls": [
+            {
+                "title@envirovoice.generate_form": {
+                    "anchor_from": "top_middle",
+                    "anchor_to": "top_middle",
+                    "offset": [
+                        0,
+                        -20
+                    ],
+                    "orientation": "vertical",
+                    "size": [
+                        "100%",
+                        "100%c"
+                    ],
+                    "factory": {
+                        "name": "buttons",
+                        "control_ids": {
+                            "toggle": "@voice_icon.empty",
+                            "step_slider": "@voice_icon.empty",
+                            "dropdown": "@voice_icon.empty",
+                            "input": "@voice_icon.empty",
+                            "header": "@voice_icon.empty",
+                            "divider": "@voice_icon.empty",
+                            "slider": "@voice_icon.empty",
+                            "label": "@envirovoice.custom_label_players"
+                        }
+                    }
+                }
+            },
+            //{ "form@envirovoice.voice_settings_players_content": {} },
+            {
+                "custom_form_panel@server_form.custom_form_panel": {
+                    "offset": [
+                        0,
+                        -2
+                    ],
+                    "anchor_to": "top_middle",
+                    "anchor_from": "top_middle",
+                    "size": [
+                        "100%",
+                        "100%-30px"
+                    ],
+                    "$scrolling_content": "envirovoice.voice_settings_players_content"
+                }
+            },
+            {
+                "buttons_tools_extra_menus@envirovoice.buttons_tools_extra_menus": {}
+            }
+        ]
+    },
+    "buttons_tools_extra_menus": {
+        "offset": [
+            0,
+            3
+        ],
+        "anchor_from": "bottom_middle",
+        "anchor_to": "bottom_middle",
+        "type": "stack_panel",
+        "size": [
+            "100%+6px",
+            30
+        ],
+        "orientation": "horizontal",
+        "controls": [
+            {
+                "submit": {
+                    "type": "panel",
+                    "size": [
+                        "fill",
+                        "100%"
+                    ],
+                    "controls": [
+                        {
+                            "submit_button@common_buttons.dark_text_button": {
+                                "$pressed_button_name": "button.submit_custom_form",
+                                "size": [
+                                    "100%",
+                                    "100%"
+                                ],
+                                "$button_text": "#submit_text",
+                                "$button_text_binding_type": "global",
+                                "$button_binding_condition": "once",
+                                "bindings": [
+                                    {
+                                        "binding_name": "#submit_button_visible",
+                                        "binding_name_override": "#visible"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "exit_players_menu_button@envirovoice.voice_toggle_menu": {
+                    "$toggle_icon_texture_voice": "textures/ui/voice/close",
+                    "$toggle_view_binding_name": "settings_voice_toggle_state",
+                    "$toggle_group_forced_index": 0
+                }
+            }
+        ]
+    },
+    "voice_settings_players_content@envirovoice.generate_form": {
+        "orientation": "vertical",
+        "size": [
+            "100%",
+            "100%c"
+        ],
+        "factory": {
+            "name": "buttons",
+            "control_ids": {
+                "label": "@voice_icon.empty",
+                "toggle": "@voice_icon.empty",
+                "step_slider": "@voice_icon.empty",
+                "dropdown": "@voice_icon.empty",
+                "input": "@voice_icon.empty",
+                "header": "@voice_icon.empty",
+                "divider": "@voice_icon.empty",
+                "slider": "@envirovoice.slider_volume_players"
+            }
+        }
+    },
+    "voice_settings_form_content": {
+        "type": "stack_panel",
+        "size": [
+            "100%",
+            "100%c"
+        ],
+        "orientation": "vertical",
+        "controls": [
+            {
+                "generated_form_volume@envirovoice.generate_form": {
+                    "orientation": "vertical",
+                    "size": [
+                        "100%",
+                        "100%c"
+                    ],
+                    "factory": {
+                        "name": "buttons",
+                        "control_ids": {
+                            "slider": "@envirovoice.slider_volume"
+                        }
+                    }
+                }
+            },
+            {
+                "generated_form_mute_deafen": {
+                    "type": "stack_panel",
+                    "orientation": "horizontal",
+                    "size": [
+                        "100%",
+                        30
+                    ],
+                    "controls": [
+                        {
+                            "factory@envirovoice.generate_form": {
+                                "orientation": "horizontal",
+                                "size": [
+                                    "100%c",
+                                    "100%"
+                                ],
+                                "factory": {
+                                    "name": "buttons",
+                                    "control_ids": {
+                                        "label": "@voice_icon.empty",
+                                        "step_slider": "@voice_icon.empty",
+                                        "dropdown": "@voice_icon.empty",
+                                        "input": "@voice_icon.empty",
+                                        "header": "@voice_icon.empty",
+                                        "divider": "@voice_icon.empty",
+                                        "slider": "@voice_icon.empty",
+                                        "toggle": "@envirovoice.custom_toggle"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "config_menu_button@envirovoice.generate_form": {
+                                "orientation": "vertical",
+                                "size": [
+                                    "100%c",
+                                    "100%"
+                                ],
+                                "factory": {
+                                    "name": "buttons",
+                                    "control_ids": {
+                                        "toggle": "@voice_icon.empty",
+                                        "step_slider": "@voice_icon.empty",
+                                        "dropdown": "@voice_icon.empty",
+                                        "input": "@voice_icon.empty",
+                                        "header": "@voice_icon.empty",
+                                        "divider": "@voice_icon.empty",
+                                        "slider": "@voice_icon.empty",
+                                        "label": "@envirovoice.config_menu_button"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "players_menu_button@envirovoice.voice_toggle_menu": {
+                                "$toggle_icon_size_voice": [
+                                    "100%y",
+                                    "80%"
+                                ],
+                                "$toggle_icon_texture_voice": "textures/ui/voice/players",
+                                "$toggle_view_binding_name": "settings_voice_players_toggle_state",
+                                "$toggle_group_forced_index": 1
+                            }
+                        },
+                        {
+                            "padd": {
+                                "type": "panel",
+                                "size": [
+                                    2,
+                                    0
+                                ]
+                            }
+                        },
+                        {
+                            "submit": {
+                                "type": "panel",
+                                "size": [
+                                    "fill",
+                                    "100%"
+                                ],
+                                "controls": [
+                                    {
+                                        "submit_button@common_buttons.dark_text_button": {
+                                            "$pressed_button_name": "button.submit_custom_form",
+                                            "size": [
+                                                "100%",
+                                                "100%"
+                                            ],
+                                            "$button_text": "#submit_text",
+                                            "$button_text_binding_type": "global",
+                                            "$button_binding_condition": "once",
+                                            "bindings": [
+                                                {
+                                                    "binding_name": "#submit_button_visible",
+                                                    "binding_name_override": "#visible"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "content_menu_config_voice_chat": {
+        "bindings": [
+            {
+                "binding_name": "#custom_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(not ((#custom_text - 'Block Distance') = #custom_text))",
+                "target_property_name": "#visible"
+            }
+        ],
+        "type": "input_panel",
+        "size": [
+            "100%",
+            "100%c"
+        ],
+        "controls": [
+            {
+                "voice_effect_settings": {
+                    "bindings": [
+                        {
+                            "binding_type": "view",
+                            "source_control_name": "settings_effects_toggle_state",
+                            "source_property_name": "#toggle_state",
+                            "target_property_name": "#visible"
+                        }
+                    ],
+                    "anchor_from": "bottom_middle",
+                    "anchor_to": "bottom_middle",
+                    "type": "panel",
+                    "size": [
+                        "100%",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "back": {
+                                "type": "image",
+                                "size": [
+                                    "100%+10px",
+                                    "100%c-2px"
+                                ],
+                                "texture": "textures/ui/cointier_backdrop",
+                                // "alpha": 0.7,
+                                "controls": [
+                                    {
+                                        "border": {
+                                            "type": "image",
+                                            "size": [
+                                                "100%+10px",
+                                                "100%c+60px"
+                                            ],
+                                            "texture": "textures/ui/dialog_background_hollow_2",
+                                            "controls": [
+                                                {
+                                                    "content@envirovoice.generate_form": {
+                                                        "offset": [
+                                                            0,
+                                                            -10
+                                                        ],
+                                                        "orientation": "vertical",
+                                                        "size": [
+                                                            "100%-30px",
+                                                            "100%c"
+                                                        ],
+                                                        "factory": {
+                                                            "name": "buttons",
+                                                            "control_ids": {
+                                                                "step_slider": "@voice_icon.empty",
+                                                                "dropdown": "@voice_icon.empty",
+                                                                "input": "@voice_icon.empty",
+                                                                "header": "@voice_icon.empty",
+                                                                "divider": "@voice_icon.empty",
+                                                                "label": "@envirovoice.custom_labels_config",
+                                                                "slider": "@envirovoice.slider_distance_voice",
+                                                                "toggle": "@envirovoice.custom_toggle_effects"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "buttons": {
+                                                        "type": "panel",
+                                                        "size": [
+                                                            0,
+                                                            0
+                                                        ],
+                                                        "layer": 99,
+                                                        "anchor_from": "bottom_middle",
+                                                        "anchor_to": "bottom_middle",
+                                                        "controls": [
+                                                            {
+                                                                "buttons_tools_extra_menus@envirovoice.buttons_tools_extra_menus": {
+                                                                    "offset": [
+                                                                        0,
+                                                                        -6
+                                                                    ],
+                                                                    "size": [
+                                                                        231,
+                                                                        30
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "config_menu_button": {
+        "type": "panel",
+        "size": [
+            "100%c",
+            "100%"
+        ],
+        "bindings": [
+            {
+                "binding_name": "#custom_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(not ((#custom_text - 'Block Distance') = #custom_text))",
+                "target_property_name": "#visible"
+            }
+        ],
+        "controls": [
+            {
+                "button@envirovoice.config_menu_button_toggle": {}
+            }
+        ]
+    },
+    "custom_toggle_effects@server_form.custom_toggle": {
+        "size": [
+            "100%",
+            "100%c"
+        ],
+        "bindings": [
+            {
+                "binding_name": "#custom_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form",
+                "binding_name_override": "#voice_toggle"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(not (#voice_toggle = 'Mute') and not (#voice_toggle = 'Deafen'))",
+                "target_property_name": "#visible"
+            }
+        ]
+    },
+    "config_menu_button_toggle@envirovoice.voice_toggle_menu": {
+        "$toggle_icon_size_voice": [
+            "100%y",
+            "80%"
+        ],
+        "$toggle_group_forced_index": 2,
+        "$toggle_icon_texture_voice": "textures/ui/voice/settings",
+        "$toggle_view_binding_name": "settings_effects_toggle_state"
+    },
+    /////     URL Server Screen 
+    "server_url_main@envirovoice.main_voice": {
+        "offset": [
+            0,
+            -30
+        ],
+        "size": [
+            225,
+            58
+        ],
+        "$voice_ui_settings": 1,
+        "$content_voice_panel": "envirovoice.url_voice_form_content",
+        "$voice_title_form": "Server URL"
+    },
+    "url_voice_form_content": {
+        "type": "stack_panel",
+        "size": [
+            "100%",
+            "100%c"
+        ],
+        "orientation": "horizontal",
+        "controls": [
+            {
+                "generated_form@envirovoice.generate_form": {
+                    "size": [
+                        "fill",
+                        "100%c"
+                    ],
+                    "orientation": "vertical",
+                    "factory": {
+                        "name": "buttons",
+                        "control_ids": {
+                            "input": "@envirovoice.custom_input" // textField
+                        }
+                    }
+                }
+            },
+            {
+                "padd": {
+                    "type": "panel",
+                    "size": [
+                        3,
+                        0
+                    ]
+                }
+            },
+            {
+                "submit": {
+                    "type": "panel",
+                    "size": [
+                        30,
+                        30
+                    ],
+                    "controls": [
+                        {
+                            "submit_button@common_buttons.dark_content_button": {
+                                "offset": [
+                                    0,
+                                    12
+                                ],
+                                "$button_content": "voice_icon.url_connect",
+                                "$pressed_button_name": "button.submit_custom_form",
+                                "size": [
+                                    "100%",
+                                    "100%"
+                                ],
+                                "$button_text": "#submit_text",
+                                "$button_text_binding_type": "global",
+                                "$button_binding_condition": "once",
+                                "bindings": [
+                                    {
+                                        "binding_name": "#submit_button_visible",
+                                        "binding_name_override": "#visible"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    //////    Buttons Toggle Dcreens
+    "voice_toggle_menu": {
+        "type": "panel",
+        "size": [
+            34,
+            30
+        ],
+        "controls": [
+            {
+                "voice_toggle_menu_content@common_toggles.light_content_toggle": {
+                    "$button_content": "voice_icon.button_toggle_custom_icon",
+                    "$toggle_group_default_selected": 0,
+                    "$radio_toggle_group": true,
+                    "$size_toggle_menu_button_voice|default": [
+                        30,
+                        30
+                    ],
+                    "size": "$size_toggle_menu_button_voice",
+                    "$toggle_name": "players_settings_voice_toggle"
+                }
+            }
+        ]
+    },
+    "voice_toggle_menu_config": {
+        "type": "panel",
+        "size": [
+            34,
+            30
+        ],
+        "controls": [
+            {
+                "voice_toggle_menu_content@common_toggles.light_content_toggle": {
+                    "$button_content": "voice_icon.button_toggle_custom_icon",
+                    "$toggle_group_default_selected": 0,
+                    "$radio_toggle_group": true,
+                    "$size_toggle_menu_button_voice|default": [
+                        30,
+                        30
+                    ],
+                    "size": "$size_toggle_menu_button_voice",
+                    "$toggle_name": "config_voice_toggle"
+                }
+            }
+        ]
+    },
+    /////     Voice Content Screens 
+    "background": {
+        "layer": 2,
+        "type": "image",
+        "texture": "$texture_background_voice",
+        "size": [
+            "100% +20px",
+            "100% + 20px"
+        ],
+        "anchor_from": "center",
+        "anchor_to": "center"
+    },
+    "stackpanel_content_voice": {
+        "layer": 3,
+        "type": "stack_panel",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "orientation": "vertical",
+        "controls": [
+            {
+                "bar_tools": {
+                    "type": "panel",
+                    "size": [
+                        "100%",
+                        15
+                    ],
+                    "controls": [
+                        {
+                            "text_title": {
+                                "visible": "($voice_ui_settings = 1)",
+                                "type": "label",
+                                "text": "#text",
+                                "color": "$title_text_color",
+                                "anchor_from": "top_middle",
+                                "anchor_to": "top_middle",
+                                "bindings": [
+                                    {
+                                        "binding_type": "view",
+                                        "source_control_name": "voice_factory_panel",
+                                        "source_property_name": "(#voice)",
+                                        "target_property_name": "#text"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "close_button@common.close_button": {
+                                "visible": "($voice_ui_settings = 1)",
+                                "$close_button_offset": [
+                                    6,
+                                    -6
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "content_voice@$content_voice_panel": {
+                    "size": [
+                        "100%",
+                        "fill"
+                    ]
+                }
+            }
+        ]
+    },
+    "generate_form": {
+        "type": "stack_panel",
+        "collection_name": "custom_form",
+        "bindings": [
+            {
+                "binding_name": "#custom_form_length",
+                "binding_name_override": "#collection_length"
+            }
+        ]
+    },
+    "custom_labels_config@server_form.custom_label": {
+        "$main_header_text_color": "$dark_button_default_text_color",
+        "bindings": [
+            {
+                "binding_name": "#custom_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(not ((#custom_text - 'Voice Effect Sounds') = #custom_text) or not ((#custom_text - 'Block Distance') = #custom_text))",
+                "target_property_name": "#visible"
+            }
+        ]
+    },
+    "custom_label_players@server_form.custom_label": {
+        "$main_header_text_color": "$title_text_color",
+        "bindings": [
+            {
+                "binding_name": "#custom_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(not ((#custom_text - 'Players Settings') = #custom_text))",
+                "target_property_name": "#visible"
+            }
+        ]
+    },
+    "custom_slider@server_form.custom_slider": {
+        "$main_header_text_color": "$title_text_color"
+    },
+    "custom_input@server_form.custom_input": {
+        "$main_header_text_color": "$title_text_color"
+    },
+    "custom_toggle@settings_voice.option_toggle": {
+        "$option_label": "#custom_text",
+        "$toggle_name": "custom_toggle",
+        "$toggle_state_binding_name": "#custom_toggle_state",
+        "$option_binding_name": "#custom_toggle_state",
+        "$toggle_binding_type": "collection",
+        "$toggle_enabled_binding_name": "#custom_toggle_enabled",
+        "$toggle_enabled_binding_type": "collection",
+        "$toggle_grid_collection_name": "custom_form",
+        "$option_tooltip_binding_type": "collection",
+        "$option_tooltip_collection_name": "custom_form",
+        "$option_tooltip_text_binding_name": "#custom_tooltip_text",
+        "$option_tooltip_area": "inside_header_panel",
+        "$label_bindings": [
+            {
+                "binding_name": "#custom_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form"
+            }
+        ],
+        "bindings": [
+            {
+                "binding_name": "#custom_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form",
+                "binding_name_override": "#voice_toggle"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "((#voice_toggle = 'Mute') or (#voice_toggle = 'Deafen'))",
+                "target_property_name": "#visible"
+            }
+        ]
+    },
+    "slider_distance_voice@envirovoice.custom_slider": {
+        "$main_header_text_color": "$dark_button_default_text_color",
+        "bindings": [
+            {
+                "binding_name": "#custom_slider_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form",
+                "binding_name_override": "#voice_slider"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(not ((#voice_slider - 'Distance') = #voice_slider))",
+                "target_property_name": "#visible"
+            }
+        ]
+    },
+    "slider_volume_players@envirovoice.custom_slider": {
+        "$main_header_text_color": "$dark_button_default_text_color",
+        "bindings": [
+            {
+                "binding_name": "#custom_slider_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form",
+                "binding_name_override": "#voice_slider"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(((#voice_slider - 'Microphone') = #voice_slider) and ((#voice_slider - 'Distance') = #voice_slider))",
+                "target_property_name": "#visible"
+            }
+        ]
+    },
+    "slider_volume@envirovoice.custom_slider": {
+        "bindings": [
+            {
+                "binding_name": "#custom_slider_text",
+                "binding_type": "collection",
+                "binding_collection_name": "custom_form",
+                "binding_name_override": "#voice_slider"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(not ((#voice_slider - 'Microphone') = #voice_slider))",
+                "target_property_name": "#visible"
+            }
+        ]
+    },
+    "main_voice": {
+        "type": "input_panel",
+        "$bindings_voice_main|default": [
+            {
+                "binding_type": "view",
+                "source_control_name": "voice_factory_panel",
+                "source_property_name": "(#voice = $voice_title_form)",
+                "target_property_name": "#visible"
+            }
+        ],
+        "bindings": "$bindings_voice_main",
+        "variables": [
+            {
+                "requires": "($voice_ui_settings = 1)",
+                "$texture_background_voice": "textures/ui/dialog_background_opaque",
+                "$visible_black_voice": false
+            },
+            {
+                "requires": "($voice_ui_settings > 1)",
+                "$texture_background_voice": "textures/ui/dialog_background_hollow_2",
+                "$visible_black_voice": true
+            }
+        ],
+        "controls": [
+            {
+                "black": {
+                    "layer": 1,
+                    "type": "image",
+                    "texture": "textures/ui/cointier_backdrop",
+                    // "alpha": 0.7,
+                    "size": [
+                        "100%+6px",
+                        "100%"
+                    ],
+                    "visible": "$visible_black_voice"
+                }
+            },
+            {
+                "background@envirovoice.background": {}
+            },
+            {
+                "content@envirovoice.stackpanel_content_voice": {}
+            }
+        ]
+    }
+}

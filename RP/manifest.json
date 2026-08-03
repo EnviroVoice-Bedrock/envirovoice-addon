@@ -1,0 +1,31 @@
+{
+    "format_version": 2,
+    "metadata": {},
+    "header": {
+        "name": "EnviroVoice RP",
+        "description": "By @Halo333X",
+        "min_engine_version": [
+            1,
+            21,
+            50
+        ],
+        "uuid": "9bd235e2-4edf-40e6-f3e3-42636f93519b",
+        "version": [
+            1,
+            0,
+            0
+        ]
+    },
+    "modules": [
+        {
+            "description": "resource",
+            "type": "resources",
+            "uuid": "6dd3e918-6cc4-48b7-cdc0-fe4518ae9d4a",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        }
+    ]
+}
