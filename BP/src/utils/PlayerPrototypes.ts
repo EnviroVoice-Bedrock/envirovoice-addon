@@ -31,5 +31,11 @@ Object.defineProperties(Player.prototype, {
         const block = this.dimension.getBlock({ x: Math.floor(x), y: Math.floor(y + 1), z: Math.floor(z) });
         return block?.typeId !== 'minecraft:air' && block?.typeId !== 'minecraft:water' && block?.typeId !== 'minecraft:flowing_water';
     }
+  },
+
+  isTalking: {
+    get() {
+        return true;
+    }
   }
 });

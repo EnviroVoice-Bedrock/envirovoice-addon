@@ -2,7 +2,7 @@ import { Player, world } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 import { EnviroVoice } from "../utils/EnviroVoice";
 
-function userVoiceForm(player: Player) {
+export default function userVoiceForm(player: Player) {
     const { isMuted, isDeafen, microphoneVolume } = EnviroVoice.getPlayerSettings(player);
     const ui = new ModalFormData();
     const players = world.getPlayers({ excludeNames: [player.name] });

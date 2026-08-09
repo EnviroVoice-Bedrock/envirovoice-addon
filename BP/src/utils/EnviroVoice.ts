@@ -4,6 +4,19 @@ import { world, Player } from "@minecraft/server";
 // TYPES
 // =====================================================
 
+interface EnviroVoicePlayerData extends PlayerSettings {
+    id: string;
+    name: string;
+}
+
+interface EnviroVoiceData {
+    server: ServerSettings & {
+        muteAll: boolean;
+    };
+
+    players: EnviroVoicePlayerData[];
+}
+
 interface PlayerVolume {
     playerId: string;
     volume: number;
@@ -656,5 +669,41 @@ export class EnviroVoice {
 
 
         return volume;
+    }
+
+    // =================================================
+    // ENVIROVOICE DATA
+    // =================================================
+
+    public static getEnviroVoiceData(): EnviroVoiceData {
+
+        const serverSettings = this.getServerSettings();
+
+        const players: EnviroVoicePlayerData[] = [];
+
+        for (const player of world.getPlayers()) {
+
+            const settings =
+                this.getPlayerSettings(player);
+
+            players.push({
+                id: player.id,
+                name: player.name,
+
+                isMuted: settings.isMuted,
+                isDeafen: settings.isDeafen,
+                microphoneVolume: settings.microphoneVolume,
+                playersVolume: settings.playersVolume
+            });
+        }
+
+        return {
+            server: {
+                ...serverSettings,
+                muteAll: this.getMuteAll()
+            },
+
+            players
+        };
     }
 }

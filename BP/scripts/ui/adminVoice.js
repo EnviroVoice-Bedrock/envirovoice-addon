@@ -1,9 +1,8 @@
-import { Player, world } from "@minecraft/server";
+import { world } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 import { EnviroVoice } from "../utils/EnviroVoice";
 import Icons from "../utils/Icons";
-
-export default function userVoiceForm(player: Player) {
+export default function userVoiceForm(player) {
     const { isMuted, isDeafen, microphoneVolume } = EnviroVoice.getPlayerSettings(player);
     const { maxDistance, roomCode, caveSound, underwaterSound, mountainSound, buriedSound } = EnviroVoice.getServerSettings();
     const ui = new ModalFormData();
@@ -26,4 +25,4 @@ export default function userVoiceForm(player: Player) {
     }
     ui.submitButton("Apply");
     return ui;
-  }
+}
