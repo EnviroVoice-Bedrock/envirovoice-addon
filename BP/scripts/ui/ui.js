@@ -1,3 +1,4 @@
 import userVoiceForm from "./userVoice";
 import adminVoiceForm from "./adminVoice";
-export { userVoiceForm, adminVoiceForm };
+import roomVoiceForm from "./roomVoice";
+export { userVoiceForm, adminVoiceForm, roomVoiceForm };

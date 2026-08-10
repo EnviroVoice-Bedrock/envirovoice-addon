@@ -1,5 +1,5 @@
 import { world, system } from "@minecraft/server";
-import { adminVoiceForm, userVoiceForm } from "./ui/ui";
+import { adminVoiceForm, userVoiceForm, roomVoiceForm } from "./ui/ui";
 import { EnviroVoice } from "./utils/EnviroVoice";
 import * as Commands from "./commands/commands";
 import "./utils/PlayerPrototypes";
@@ -18,6 +18,16 @@ system.beforeEvents.startup.subscribe(e => {
                 adminVoiceForm(player);
             else
                 userVoiceForm(player);
+        });
+    });
+    e.customCommandRegistry.registerCommand(Commands.RoomUrlCmd, cmd => {
+        if (!cmd.sourceEntity)
+            return;
+        const player = cmd.sourceEntity;
+        const isAdmin = player.playerPermissionLevel === 2;
+        system.run(() => {
+            if (isAdmin)
+                roomVoiceForm(player);
         });
     });
     e.customCommandRegistry.registerCommand(Commands.MuteEveryoneCmd, () => {

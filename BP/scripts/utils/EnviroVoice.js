@@ -91,11 +91,11 @@ export class EnviroVoice {
     // =================================================
     // ROOM URL
     // =================================================
-    static setRoomUrl(code) {
-        world.setDynamicProperty(ENVIRONMENT_VOICE.ROOM_URL, code);
+    static setRoomUrl(url) {
+        world.setDynamicProperty(ENVIRONMENT_VOICE.ROOM_URL, url);
     }
     /**
-     * Gets the room code.
+     * Gets the room url.
      *
      * Default: ""
      */

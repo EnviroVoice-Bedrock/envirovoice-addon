@@ -2,7 +2,14 @@ import { Player, world } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 import { EnviroVoice } from "../utils/EnviroVoice";
 
-// AQUI HABRA UN FORM PARA QUE EL USUARIO AL ENTRAR AL MUNDO, PEGUE LA URL DE FIREBASE, PARA QUE LA WEB PUEDA LEER LOS DATOS DEL JUEGO
 export default function roomVoiceForm(player: Player) {
-
+    const ui = new ModalFormData();
+    ui.title("Server URL");
+    ui.textField("Server URL", "https://...")
+    .show(player)
+    .then((data) => {
+        if (data.canceled || !data.formValues) return;
+        const serverURL = data.formValues[0] as string;
+        EnviroVoice.setRoomUrl(serverURL);
+    });
 }

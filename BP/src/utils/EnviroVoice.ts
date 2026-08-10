@@ -243,18 +243,18 @@ export class EnviroVoice {
     // =================================================
 
     public static setRoomUrl(
-        code: string
+        url: string
     ): void {
 
         world.setDynamicProperty(
             ENVIRONMENT_VOICE.ROOM_URL,
-            code
+            url
         );
     }
 
 
     /**
-     * Gets the room code.
+     * Gets the room url.
      *
      * Default: ""
      */
