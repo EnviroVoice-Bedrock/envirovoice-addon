@@ -2,9 +2,9 @@ import { world } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 import { EnviroVoice } from "../utils/EnviroVoice";
 import Icons from "../utils/Icons";
-export default function userVoiceForm(player) {
+export default function adminVoiceForm(player) {
     const { isMuted, isDeafen, microphoneVolume } = EnviroVoice.getPlayerSettings(player);
-    const { maxDistance, roomCode, caveSound, underwaterSound, mountainSound, buriedSound } = EnviroVoice.getServerSettings();
+    const { maxDistance, caveSound, underwaterSound, mountainSound, buriedSound } = EnviroVoice.getServerSettings();
     const ui = new ModalFormData();
     const players = world.getPlayers({ excludeNames: [player.name] });
     ui.title("Voice Settings");
@@ -24,5 +24,21 @@ export default function userVoiceForm(player) {
         ui.slider(`${p.name} Volume`, 0, 100, { defaultValue: volume });
     }
     ui.submitButton("Apply");
-    return ui;
+    return ui.show(player).then(res => {
+        if (res.canceled || !res.formValues)
+            return;
+        const [microphoneVolume, mute, deafen, , blockDistance, , caveSound, underwaterSound, mountainSound, buriedSound, ,] = res.formValues;
+        EnviroVoice.setMicrophoneVolume(player, microphoneVolume);
+        EnviroVoice.setDeafen(player, deafen);
+        EnviroVoice.setMute(player, deafen ? true : mute);
+        EnviroVoice.setMaxDistance(blockDistance);
+        EnviroVoice.setCaveSound(caveSound);
+        EnviroVoice.setUnderwaterSound(underwaterSound);
+        EnviroVoice.setMountainSound(mountainSound);
+        EnviroVoice.setBuriedSound(buriedSound);
+        for (const p of players) {
+            const volume = res.formValues[11 + players.indexOf(p)];
+            EnviroVoice.setPlayerVolume(player, p.id, volume);
+        }
+    });
 }

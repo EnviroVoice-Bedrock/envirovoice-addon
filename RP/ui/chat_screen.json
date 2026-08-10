@@ -1,1 +1,0 @@
-{"chat_bottom_panel":{"modifications":[{"operation":"insert_after","control_name":"chat_settings","value":[{"enter_menu_voicechat@buttons_chat_voice.enter_menu_voicechat":{}}]},{"operation":"replace","control_name":"text_box","value":[{"text_box@buttons_chat_voice.text_box":{}}]}]}}

@@ -13,10 +13,12 @@ system.beforeEvents.startup.subscribe(e => {
             return;
         const player = cmd.sourceEntity;
         const isAdmin = player.playerPermissionLevel === 2;
-        if (isAdmin)
-            adminVoiceForm(player);
-        else
-            userVoiceForm(player);
+        system.run(() => {
+            if (isAdmin)
+                adminVoiceForm(player);
+            else
+                userVoiceForm(player);
+        });
     });
     e.customCommandRegistry.registerCommand(Commands.MuteEveryoneCmd, () => {
         EnviroVoice.setMuteAll(true);
@@ -28,28 +30,22 @@ system.beforeEvents.startup.subscribe(e => {
 // =================================================
 // INITIALIZE
 // =================================================
-let api = new HivemindAPI("envirovoice:addon", { scriptEvent: false, namespace: "envirovoice" });
-world.afterEvents.worldLoad.subscribe(() => {
-});
+let api = new HivemindAPI("envirovoice:addon", { scriptEvent: false, namespace: "envirovoice", logFailures: false });
 // =================================================
 // INTERVAL
 // =================================================
 system.runInterval(async () => {
-    for (const player of world.getPlayers()) {
-        player.playAnimation('animation.envirovoice.speak', { blendOutTime: 1 });
-    }
-}, 10);
-world.afterEvents.itemUse.subscribe(async ({ itemStack }) => {
-    if (itemStack.typeId !== "minecraft:gold_ingot")
-        return;
-    const uri = `https://envirovoice-test-default-rtdb.europe-west1.firebasedatabase.app/server.json`;
+    const DATABASE = 'https://envirovoice-test-default-rtdb.europe-west1.firebasedatabase.app/';
+    const uri = `minecraft.json`;
     const data = EnviroVoice.getEnviroVoiceData();
-    const response = await api.sendHttpRequest(uri, {
+    const response = await api.sendHttpRequest(DATABASE + uri, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
     });
-    world.sendMessage(`§aFirebase: ${response.data}`);
-});
+    for (const player of world.getPlayers()) {
+        player.playAnimation('animation.envirovoice.speak', { blendOutTime: 0.5 });
+    }
+}, 20);

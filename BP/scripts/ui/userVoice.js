@@ -15,5 +15,16 @@ export default function userVoiceForm(player) {
         ui.slider(`${p.name} Volume`, 0, 100, { defaultValue: volume });
     }
     ui.submitButton("Apply");
-    return ui;
+    ui.show(player).then((res) => {
+        if (res.canceled || !res.formValues)
+            return;
+        const [microphoneVolume, mute, deafen, ,] = res.formValues;
+        EnviroVoice.setMicrophoneVolume(player, microphoneVolume);
+        EnviroVoice.setDeafen(player, deafen);
+        EnviroVoice.setMute(player, deafen ? true : mute);
+        for (const p of players) {
+            const volume = res.formValues[4 + players.indexOf(p)];
+            EnviroVoice.setPlayerVolume(player, p.id, volume);
+        }
+    });
 }

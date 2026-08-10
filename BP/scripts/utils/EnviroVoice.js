@@ -7,7 +7,7 @@ const ENVIRONMENT_VOICE = {
     // Global
     // =================================================
     MAX_DISTANCE: "envirovoice:max_distance",
-    ROOM_CODE: "envirovoice:room_code",
+    ROOM_URL: "envirovoice:room_url",
     MUTE_ALL: "envirovoice:mute_all",
     // =================================================
     // Environment sounds
@@ -50,7 +50,7 @@ export class EnviroVoice {
      * Default: 32
      */
     static getMaxDistance() {
-        return world.getDynamicProperty(ENVIRONMENT_VOICE.MAX_DISTANCE) ?? 32;
+        return world.getDynamicProperty(ENVIRONMENT_VOICE.MAX_DISTANCE) ?? 50;
     }
     // =================================================
     // CAVE SOUND
@@ -89,18 +89,18 @@ export class EnviroVoice {
         return world.getDynamicProperty(ENVIRONMENT_VOICE.BURIED_SOUND) ?? true;
     }
     // =================================================
-    // ROOM CODE
+    // ROOM URL
     // =================================================
-    static setRoomCode(code) {
-        world.setDynamicProperty(ENVIRONMENT_VOICE.ROOM_CODE, code);
+    static setRoomUrl(code) {
+        world.setDynamicProperty(ENVIRONMENT_VOICE.ROOM_URL, code);
     }
     /**
      * Gets the room code.
      *
      * Default: ""
      */
-    static getRoomCode() {
-        return world.getDynamicProperty(ENVIRONMENT_VOICE.ROOM_CODE) ?? "";
+    static getRoomUrl() {
+        return world.getDynamicProperty(ENVIRONMENT_VOICE.ROOM_URL) ?? "";
     }
     // =================================================
     // SERVER SETTINGS
@@ -108,7 +108,7 @@ export class EnviroVoice {
     static getServerSettings() {
         return {
             maxDistance: this.getMaxDistance(),
-            roomCode: this.getRoomCode(),
+            roomUrl: this.getRoomUrl(),
             caveSound: this.getCaveSound(),
             underwaterSound: this.getUnderwaterSound(),
             mountainSound: this.getMountainSound(),
@@ -300,6 +300,9 @@ export class EnviroVoice {
             players.push({
                 id: player.id,
                 name: player.name,
+                dimension: player.dimension.id,
+                location: player.location,
+                rotation: player.getRotation(),
                 isMuted: settings.isMuted,
                 isDeafen: settings.isDeafen,
                 microphoneVolume: settings.microphoneVolume,

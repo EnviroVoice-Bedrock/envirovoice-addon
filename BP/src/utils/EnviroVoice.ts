@@ -7,6 +7,19 @@ import { world, Player } from "@minecraft/server";
 interface EnviroVoicePlayerData extends PlayerSettings {
     id: string;
     name: string;
+
+    dimension: string;
+
+    location: {
+        x: number,
+        y: number,
+        z: number
+    };
+
+    rotation: {
+        x: number,
+        y: number
+    }
 }
 
 interface EnviroVoiceData {
@@ -31,7 +44,7 @@ interface PlayerSettings {
 
 interface ServerSettings {
     maxDistance: number;
-    roomCode: string;
+    roomUrl: string;
 
     caveSound: boolean;
     underwaterSound: boolean;
@@ -50,7 +63,7 @@ const ENVIRONMENT_VOICE = {
     // =================================================
 
     MAX_DISTANCE: "envirovoice:max_distance",
-    ROOM_CODE: "envirovoice:room_code",
+    ROOM_URL: "envirovoice:room_url",
     MUTE_ALL: "envirovoice:mute_all",
 
     // =================================================
@@ -121,7 +134,7 @@ export class EnviroVoice {
             world.getDynamicProperty(
                 ENVIRONMENT_VOICE.MAX_DISTANCE
             ) as number | undefined
-        ) ?? 32;
+        ) ?? 50;
     }
 
 
@@ -226,15 +239,15 @@ export class EnviroVoice {
 
 
     // =================================================
-    // ROOM CODE
+    // ROOM URL
     // =================================================
 
-    public static setRoomCode(
+    public static setRoomUrl(
         code: string
     ): void {
 
         world.setDynamicProperty(
-            ENVIRONMENT_VOICE.ROOM_CODE,
+            ENVIRONMENT_VOICE.ROOM_URL,
             code
         );
     }
@@ -245,11 +258,11 @@ export class EnviroVoice {
      *
      * Default: ""
      */
-    public static getRoomCode(): string {
+    public static getRoomUrl(): string {
 
         return (
             world.getDynamicProperty(
-                ENVIRONMENT_VOICE.ROOM_CODE
+                ENVIRONMENT_VOICE.ROOM_URL
             ) as string | undefined
         ) ?? "";
     }
@@ -263,7 +276,7 @@ export class EnviroVoice {
 
         return {
             maxDistance: this.getMaxDistance(),
-            roomCode: this.getRoomCode(),
+            roomUrl: this.getRoomUrl(),
 
             caveSound: this.getCaveSound(),
             underwaterSound: this.getUnderwaterSound(),
@@ -689,6 +702,9 @@ export class EnviroVoice {
             players.push({
                 id: player.id,
                 name: player.name,
+                dimension: player.dimension.id,
+                location: player.location,
+                rotation: player.getRotation(),
 
                 isMuted: settings.isMuted,
                 isDeafen: settings.isDeafen,

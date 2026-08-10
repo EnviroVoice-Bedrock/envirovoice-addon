@@ -3,7 +3,7 @@
 
     "enter_menu_voicechat@buttons_chat_voice.command": {
         "$texture_button_icon": "textures/ui/voice/unmute",
-        "$command": "/voice:settings",
+        "$command": "/envirovoice:settings",
         "$command_tooltip": "Open the voice chat menu",
         "size": [27, 27],
         "layer": 7
