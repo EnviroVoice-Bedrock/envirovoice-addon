@@ -45,7 +45,9 @@ let api = new HivemindAPI("envirovoice:addon", { scriptEvent: false, namespace: 
 // INTERVAL
 // =================================================
 system.runInterval(async () => {
-    const DATABASE = 'https://envirovoice-test-default-rtdb.europe-west1.firebasedatabase.app/';
+    const DATABASE = EnviroVoice.getRoomUrl();
+    if (!DATABASE)
+        return;
     const uri = `minecraft.json`;
     const data = EnviroVoice.getEnviroVoiceData();
     const response = await api.sendHttpRequest(DATABASE + uri, {
